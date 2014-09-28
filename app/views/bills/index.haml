@@ -1,0 +1,22 @@
+.panel.panel-default
+  .panel-body
+    - if @bills.empty?
+      %p.bills You have no bills.
+    - else
+      .bills
+        - @bills.each do |bill|
+          .row
+            .col-md-12
+              %form{ action: "bills/pay/#{bill.id}", method: :post }
+                %input{ type: :hidden, name: 'authenticity_token', value: "#{form_authenticity_token}" }
+
+                .btn-group.hidden-xs.bill
+                  %input.btn.btn-primary.pay{ type: :submit, value: 'Pay' }
+
+                .name
+                  %strong= bill.name
+                .due= bill.due_date.strftime('%B %-d')
+                .days-left= bill.days_left
+
+                .btn-group.visible-xs.bill
+                  %input.btn.btn-primary.pay.btn-block{ type: :submit, value: 'Pay' }

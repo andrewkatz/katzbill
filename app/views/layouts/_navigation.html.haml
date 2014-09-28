@@ -1,5 +1,4 @@
--# navigation styled for Bootstrap 3.0
-%nav.navbar.navbar-default.navbar-fixed-top
+%nav.navbar.navbar-inverse
   .container
     .navbar-header
       %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
@@ -7,7 +6,16 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      = link_to 'Home', root_path, class: 'navbar-brand'
+      = link_to 'kBill', root_path, class: 'navbar-brand'
     .collapse.navbar-collapse
-      %ul.nav.navbar-nav
-        = render 'layouts/navigation_links'
+      - if user_signed_in?
+        %ul.nav.navbar-nav
+          %li= link_to 'Bills', bills_path
+          %li= link_to 'Add Bill', new_bill_path
+        %ul.nav.navbar-nav.navbar-right
+          %li= link_to 'Edit Account', edit_user_registration_path
+          %li= link_to 'Sign Out', destroy_user_session_path, method: :delete
+      - else
+        %ul.nav.navbar-nav.navbar-right
+          %li= link_to 'Sign Up', new_user_registration_path
+          %li= link_to 'Sign In', new_user_session_path

@@ -37,6 +37,8 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.2.0.2)
       sass (~> 3.2)
+    bootswatch-rails (3.2.4)
+      railties (>= 3.1)
     builder (3.2.2)
     coderay (1.1.0)
     coffee-rails (4.0.1)
@@ -143,7 +145,6 @@ GEM
       rdoc (~> 4.0)
     sexp_processor (4.4.4)
     slop (3.6.0)
-    spring (1.1.3)
     sprockets (2.11.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -174,6 +175,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-sass
+  bootswatch-rails
   coffee-rails (~> 4.0.0)
   devise
   foreman
@@ -190,7 +192,6 @@ DEPENDENCIES
   rails_layout
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
-  spring
   sqlite3
   turbolinks
   uglifier (>= 1.3.0)
