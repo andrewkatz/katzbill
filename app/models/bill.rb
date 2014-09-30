@@ -25,6 +25,7 @@ class Bill < ActiveRecord::Base
       difference = today - self.due_date
     end
 
-    "#{ difference.to_i } days"
+    difference = difference.to_i
+    [difference, 'day'.pluralize(difference)].join(' ')
   end
 end
