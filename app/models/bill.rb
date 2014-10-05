@@ -23,7 +23,7 @@ class Bill < ActiveRecord::Base
   end
 
   def should_send_reminder?
-    REMINDER_INTERVAL.include? days
+    REMINDER_INTERVALS.include? days
   end
 
   private
