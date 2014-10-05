@@ -1,4 +1,6 @@
 class Bill < ActiveRecord::Base
+  REMINDER_INTERVALS = [0, 3, 7].freeze
+
   belongs_to :user
 
   validates :name, :due_date, presence: true
@@ -15,9 +17,21 @@ class Bill < ActiveRecord::Base
   end
 
   def days_left
+    return 'Today' if days == 0
+
+    [days, 'day'.pluralize(days)].join(' ')
+  end
+
+  def should_send_reminder?
+    REMINDER_INTERVAL.include? days
+  end
+
+  private
+
+  def days
     today = Date.current
 
-    return 'Today' if self.due_date == today
+    return 0 if self.due_date == today
 
     if self.due_date > today
       difference = self.due_date - today
@@ -25,7 +39,6 @@ class Bill < ActiveRecord::Base
       difference = today - self.due_date
     end
 
-    difference = difference.to_i
-    [difference, 'day'.pluralize(difference)].join(' ')
+    difference.to_i
   end
 end

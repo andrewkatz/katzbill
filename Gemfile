@@ -14,6 +14,7 @@ gem 'bootstrap-sass'
 gem 'bootswatch-rails'
 gem 'devise'
 gem 'haml-rails'
+gem 'postmark-rails'
 
 group :development do
   gem 'better_errors'
