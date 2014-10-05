@@ -1,5 +1,5 @@
 class BillMailer < ActionMailer::Base
-  default from: 'no-reply@katzbill.com'
+  default from: 'katzbill@andrewkatz.net'
 
   def reminder_email(bill)
     @bill = bill
