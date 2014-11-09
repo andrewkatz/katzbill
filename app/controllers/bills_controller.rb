@@ -6,11 +6,11 @@ class BillsController < ApplicationController
   end
 
   def new
-    @bill = current_user.bills.build
+    @bill = current_user.account.bills.build
   end
 
   def create
-    @bill = current_user.bills.build(bill_params)
+    @bill = current_user.account.bills.build(bill_params)
 
     while @bill.due_date < Date.current
       @bill.pay

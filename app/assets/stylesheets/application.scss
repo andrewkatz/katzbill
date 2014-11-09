@@ -1,12 +1,17 @@
 $body-bg: #f9f9f9;
 $well-bg: #fff;
-$font-family-sans-serif:  "Nunito", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-sans-serif:  "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 $font-size-base: 14px !default;
 $btn-default-border: #fff;
 
 @import "bootswatch/paper/variables";
 @import "bootstrap";
 @import "bootswatch/paper/bootswatch";
+
+body
+{
+  -webkit-font-smoothing: inherit;
+}
 
 .btn.btn-default
 {
@@ -101,4 +106,9 @@ p.bills
 .form-control
 {
   -webkit-appearance: none;
+}
+
+ul.users
+{
+  list-style: none;
 }

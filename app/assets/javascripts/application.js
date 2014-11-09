@@ -15,3 +15,14 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
+
+var invitedLink = $('a#invited');
+invitedLink.click(function(event) {
+  event.preventDefault();
+
+  invitedLink.toggleClass('hidden');
+
+  var inviteTokenGroup = $('#invite_token');
+  inviteTokenGroup.toggleClass('hidden');
+  inviteTokenGroup.children('input').focus();
+});

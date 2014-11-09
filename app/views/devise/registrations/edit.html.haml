@@ -1,0 +1,38 @@
+.panel.panel-default
+  .panel-heading Account Users
+  - if resource.account.users.size > 1
+    %ul.list-group
+      - resource.account.users.each do |user|
+        %li.list-group-item= user.email
+  .panel-body.text-center
+    %p Invite a user by having them sign up with the following account token.
+    %pre= resource.account.token
+.panel.panel-default
+  .panel-heading Email &amp; Password
+  .panel-body
+    = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :role => 'form'}) do |f|
+      = devise_error_messages!
+      .form-group
+        = f.label :email
+        = f.email_field :email, class: 'form-control'
+        - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+          %div
+            Currently waiting confirmation for: #{resource.unconfirmed_email}
+      %p Leave these fields blank if you don't want to change your password.
+      .form-group
+        = f.label :password
+        = f.password_field :password, :autocomplete => 'off', class: 'form-control'
+      .form-group
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation, class: 'form-control'
+      %fieldset
+        %p You must enter your current password to make changes.
+        .form-group
+          = f.label :current_password
+          = f.password_field :current_password, class: 'form-control'
+      = f.submit 'Update', :class => 'btn btn-primary'
+.panel.panel-default
+  .panel-heading Delete User
+  .panel-body
+    %p This will not affect the bills attached to the account if other users are still active.
+    = button_to "Delete my user", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-danger'

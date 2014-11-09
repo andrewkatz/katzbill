@@ -1,0 +1,20 @@
+.panel.panel-default
+  .panel-body
+    = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :role => 'form'}) do |f|
+      - resource.errors.full_messages.each do |message|
+        .alert.alert-warning{ role: 'alert' }= message
+      .form-group
+        = f.label :email
+        = f.email_field :email, class: 'form-control'
+      .form-group
+        = f.label :password
+        = f.password_field :password, class: 'form-control'
+      .form-group
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation, class: 'form-control'
+      .form-group
+        %a#invited{ href: '#' } I have an invite token
+        #invite_token.hidden
+          = label_tag :invite_token
+          = text_field_tag 'user[invite_token]', nil, class: 'form-control'
+      = f.submit 'Sign up', :class => 'btn btn-primary'

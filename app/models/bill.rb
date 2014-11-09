@@ -1,7 +1,7 @@
 class Bill < ActiveRecord::Base
   REMINDER_INTERVALS = [0, 3, 7].freeze
 
-  belongs_to :user
+  belongs_to :account
 
   validates :name, :due_date, presence: true
 
