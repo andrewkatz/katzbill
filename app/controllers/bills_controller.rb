@@ -1,5 +1,6 @@
 class BillsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_bill_from_params, only: [:pay, :paid]
 
   def index
     @bills = current_user.bills
@@ -24,15 +25,24 @@ class BillsController < ApplicationController
   end
 
   def pay
-    bill = Bill.find(params[:bill_id])
-    bill.pay!
+    unless @bill.pay_url.present?
+      redirect_to action: :paid, id: params[:bill_id]
+    end
+  end
+
+  def paid
+    @bill.pay!
 
     redirect_to action: :index
   end
 
   private
 
+  def set_bill_from_params
+    @bill = current_user.bills.where(id: params[:bill_id]).first!
+  end
+
   def bill_params
-    params.require(:bill).permit(:id, :name, :due_date)
+    params.require(:bill).permit(:id, :name, :due_date, :pay_url)
   end
 end

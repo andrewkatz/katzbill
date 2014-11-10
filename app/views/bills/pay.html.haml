@@ -1,0 +1,12 @@
+.panel.panel-default
+  .panel-body
+    %h3= @bill.name
+    %p
+      %a#pay_url.btn.btn-primary{ href: @bill.pay_url, target: '_blank' } Open Pay URL
+      %a.btn.btn-success{ href: "/bills/paid/#{@bill.id}" } Mark as Paid
+
+= content_for :on_ready do
+  :javascript
+    $('a#pay_url').click(function() {
+      document.title = 'katzbill: mark bill paid';
+    });

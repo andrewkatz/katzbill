@@ -3,7 +3,8 @@ Rails.application.routes.draw do
 
   resources :bills, only: [:index, :create, :new]
 
-  post 'bills/pay/:bill_id', to: 'bills#pay'
+  get 'bills/pay/:bill_id', to: 'bills#pay'
+  get 'bills/paid/:bill_id', to: 'bills#paid'
 
   root 'bills#index'
 end

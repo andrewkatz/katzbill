@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141108233058) do
+ActiveRecord::Schema.define(version: 20141110004054) do
 
   create_table "accounts", force: true do |t|
     t.string "token"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20141108233058) do
     t.date    "due_date"
     t.integer "user_id"
     t.integer "account_id"
+    t.string  "pay_url"
   end
 
   add_index "bills", ["account_id"], name: "index_bills_on_account_id"
