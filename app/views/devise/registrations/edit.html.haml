@@ -11,7 +11,7 @@
   .panel-heading ICal Calendar Feed
   .panel-body
     To add you bills to you calendar use the folling url:
-    = link_to nil, calendar_url(resource.calendar_token)
+    = link_to nil, calendar_url(resource.calendar_token, format: :ics)
 .panel.panel-default
   .panel-heading Email &amp; Password
   .panel-body
