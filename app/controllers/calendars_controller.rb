@@ -18,7 +18,7 @@ class CalendarsController < ApplicationController
       event.dtstart             = bill.due_date
       event.dtstart.ical_params = { 'VALUE' => 'DATE' }
       event.summary             = "#{bill.name} bill due"
-      calendar.add_event.event
+      calendar.add_event(event)
     end
     calendar.publish
     calendar
