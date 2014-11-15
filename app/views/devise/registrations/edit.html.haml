@@ -8,6 +8,11 @@
     %p Invite a user by having them sign up with the following invite token. Invited users will share all bills with you.
     %pre= resource.account.token
 .panel.panel-default
+  .panel-heading ICal Calendar Feed
+  .panel-body
+    To add you bills to you calendar use the folling url:
+    = link_to nil, calendar_url(resource.calendar_token)
+.panel.panel-default
   .panel-heading Email &amp; Password
   .panel-body
     = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :role => 'form'}) do |f|

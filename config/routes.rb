@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :bills, only: [:index, :create, :new]
 
+  get 'calendar/:token', to: 'calendars#show', as: :calendar
   post 'bills/pay/:bill_id', to: 'bills#pay'
 
   root 'bills#index'

@@ -14,6 +14,7 @@ gem 'bootswatch-rails'
 gem 'devise'
 gem 'haml-rails'
 gem 'postmark-rails'
+gem 'icalendar'
 
 group :development do
   gem 'better_errors'
