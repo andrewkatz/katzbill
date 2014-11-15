@@ -19,7 +19,8 @@ class Bill < ActiveRecord::Base
   def days_left
     return 'Today' if days == 0
 
-    [days, 'day'.pluralize(days)].join(' ')
+    days_str = [days, 'day'.pluralize(days)].join(' ')
+    days < 0 ? [days_str, 'ago'].join(' ') : days_str
   end
 
   def should_send_reminder?
