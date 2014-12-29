@@ -14,11 +14,12 @@
           - bills.each do |bill|
             .row
               .col-md-12
-                %form{ action: "bills/pay/#{bill.id}", method: :post }
-                  %input{ type: :hidden, name: 'authenticity_token', value: "#{form_authenticity_token}" }
-
+                = form_for bill, url: pay_bill_path(bill), method: :post do |f|
                   .btn-group.hidden-xs.bill
-                    %input.btn.btn-primary.pay{ type: :submit, value: 'Pay' }
+                    = link_to 'Delete', bill, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }
+                    - if bill.pay_url
+                      = link_to 'Open', bill.pay_url, class: 'btn btn-info', target: '_blank'
+                    = f.submit 'Pay', class: 'btn btn-primary pay'
 
                   .name
                     %strong= bill.name
@@ -26,4 +27,7 @@
                   .days-left= bill.days_left
 
                   .btn-group.visible-xs.bill
-                    %input.btn.btn-primary.pay.btn-block{ type: :submit, value: 'Pay' }
+                    = link_to 'Delete', bill, method: :delete, class: 'btn btn-danger btn-block', confirm: 'Are you sure?'
+                    - if bill.pay_url
+                      = link_to 'Open', bill.pay_url, class: 'btn btn-info btn-block', target: '_blank'
+                    = f.submit 'Pay', class: 'btn btn-primary pay btn-block'

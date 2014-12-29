@@ -24,15 +24,22 @@ class BillsController < ApplicationController
   end
 
   def pay
-    bill = Bill.find(params[:bill_id])
+    bill = current_user.bills.find(params[:id])
     bill.pay!
 
     redirect_to action: :index
   end
 
+  def destroy
+    bill = current_user.bills.find(params[:id])
+    bill.destroy
+
+    redirect_to bills_path
+  end
+
   private
 
   def bill_params
-    params.require(:bill).permit(:id, :name, :due_date)
+    params.require(:bill).permit(:id, :name, :due_date, :pay_url)
   end
 end
