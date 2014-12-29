@@ -5,6 +5,7 @@ $font-size-base: 14px !default;
 $btn-default-border: #fff;
 
 @import "bootswatch/paper/variables";
+@import "bootstrap-sprockets";
 @import "bootstrap";
 @import "bootswatch/paper/bootswatch";
 
@@ -13,7 +14,7 @@ body
   -webkit-font-smoothing: inherit;
 }
 
-.btn.btn-default
+.btn.btn-default.cancel
 {
   box-shadow: none;
   -webkit-box-shadow: none;
@@ -58,6 +59,12 @@ ul.errors
 .btn-group.bill
 {
   margin-top: 15px;
+
+  .btn
+  {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+  }
 }
 
 @media (min-width: 768px)

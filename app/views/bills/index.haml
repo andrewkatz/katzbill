@@ -16,9 +16,10 @@
               .col-md-12
                 = form_for bill, url: pay_bill_path(bill), method: :post do |f|
                   .btn-group.hidden-xs.bill
-                    = link_to 'Delete', bill, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }
-                    - if bill.pay_url
-                      = link_to 'Open', bill.pay_url, class: 'btn btn-info', target: '_blank'
+                    = link_to bill, method: :delete, class: 'btn btn-default', data: { confirm: 'Are you sure?' } do
+                      %span.glyphicon.glyphicon-trash
+                    = link_to bill.pay_url, class: 'btn btn-default', target: '_blank', disabled: bill.pay_url.blank? do
+                      %span.glyphicon.glyphicon-new-window
                     = f.submit 'Pay', class: 'btn btn-primary pay'
 
                   .name
@@ -26,8 +27,12 @@
                   .due= bill.due_date.strftime('%B %-d')
                   .days-left= bill.days_left
 
-                  .btn-group.visible-xs.bill
-                    = link_to 'Delete', bill, method: :delete, class: 'btn btn-danger btn-block', confirm: 'Are you sure?'
-                    - if bill.pay_url
-                      = link_to 'Open', bill.pay_url, class: 'btn btn-info btn-block', target: '_blank'
-                    = f.submit 'Pay', class: 'btn btn-primary pay btn-block'
+                  .row.visible-xs.bill
+                    .col-xs-4
+                      = link_to bill, method: :delete, class: 'btn btn-default btn-block', data: { confirm: 'Are you sure?' } do
+                        %span.glyphicon.glyphicon-trash
+                    .col-xs-4
+                      = link_to bill.pay_url, class: 'btn btn-default btn-block', target: '_blank', disabled: bill.pay_url.blank? do
+                        %span.glyphicon.glyphicon-new-window
+                    .col-xs-4
+                      = f.submit 'Pay', class: 'btn btn-primary pay btn-block'
