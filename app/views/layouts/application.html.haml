@@ -5,6 +5,7 @@
     %title= content_for?(:title) ? yield(:title) : 'Bills & Stuff'
     %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'katzbill'}"}
     %link{href: 'http://fonts.googleapis.com/css?family=Source+Sans+Pro', rel: 'stylesheet', type: 'text/css'}
+    = favicon_link_tag 'favicon.png'
     = stylesheet_link_tag 'application', media: 'all'
     = csrf_meta_tags
   %body
