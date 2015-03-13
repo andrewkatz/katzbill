@@ -7,7 +7,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :paychecks, only: [:index, :create, :new, :destroy] do
+    member do
+      post 'pay'
+    end
+  end
+
   get 'calendar/:token(.:format)', to: 'calendars#show', as: :calendar
 
-  root 'bills#index'
+  root 'home#index'
 end

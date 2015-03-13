@@ -1,10 +1,6 @@
 class BillsController < ApplicationController
   before_action :authenticate_user!
 
-  def index
-    @bills = current_user.bills
-  end
-
   def new
     @bill = current_user.account.bills.build
   end
@@ -17,7 +13,7 @@ class BillsController < ApplicationController
     end
 
     if @bill.save
-      redirect_to action: :index
+      redirect_to root_path
     else
       render :new
     end
@@ -27,14 +23,14 @@ class BillsController < ApplicationController
     bill = current_user.bills.find(params[:id])
     bill.pay!
 
-    redirect_to action: :index
+    redirect_to root_path
   end
 
   def destroy
     bill = current_user.bills.find(params[:id])
     bill.destroy
 
-    redirect_to bills_path
+    redirect_to root_path
   end
 
   private

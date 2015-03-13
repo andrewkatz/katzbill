@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :bills, through: :account
+  has_many :paychecks, through: :account
   belongs_to :account
 
   before_validation :ensure_account
