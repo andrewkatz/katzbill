@@ -1,13 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations' }
 
-  resources :bills, only: [:index, :create, :new, :destroy] do
-    member do
-      post 'pay'
-    end
-  end
-
-  resources :paychecks, only: [:index, :create, :new, :destroy] do
+  resources :payments, only: [:index, :create, :new, :destroy] do
     member do
       post 'pay'
     end

@@ -1,4 +1,5 @@
 class Account < ActiveRecord::Base
+  has_many :payments
   has_many :bills
   has_many :paychecks
   has_many :users

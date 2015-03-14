@@ -11,33 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150313030025) do
+ActiveRecord::Schema.define(version: 20150314193550) do
 
   create_table "accounts", force: true do |t|
     t.string "token"
   end
 
-  create_table "bills", force: true do |t|
-    t.string  "name"
-    t.date    "due_date"
-    t.integer "user_id"
-    t.integer "account_id"
-    t.string  "pay_url"
-  end
-
-  add_index "bills", ["account_id"], name: "index_bills_on_account_id"
-
-  create_table "paychecks", force: true do |t|
+  create_table "payments", force: true do |t|
     t.string   "name"
-    t.date     "pay_date"
-    t.integer  "user_id"
+    t.datetime "last_paid_date"
+    t.datetime "next_pay_date"
+    t.string   "url"
+    t.string   "type"
     t.integer  "account_id"
+    t.integer  "due_on"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "paychecks", ["account_id"], name: "index_paychecks_on_account_id"
-  add_index "paychecks", ["user_id"], name: "index_paychecks_on_user_id"
+  add_index "payments", ["account_id"], name: "index_payments_on_account_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
