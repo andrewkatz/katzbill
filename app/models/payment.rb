@@ -40,6 +40,8 @@ class Payment < ActiveRecord::Base
     while !allow_weekends && (next_pay_date.saturday? || next_pay_date.sunday?)
       self.next_pay_date -= 1.day
     end
+
+    update_next_pay_date if next_pay_date < Time.zone.now
   end
 
   private
