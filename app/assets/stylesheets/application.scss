@@ -119,3 +119,22 @@ ul.users
 {
   list-style: none;
 }
+
+input[type=number] {
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  -webkit-appearance: none;
+  @include box-shadow(inset 0 -1px 0 #ddd);
+  font-size: 16px;
+
+  &:focus {
+    @include box-shadow(inset 0 -2px 0 $brand-primary);
+  }
+
+  &[disabled],
+  &[readonly] {
+    @include box-shadow(none);
+    border-bottom: 1px dotted #ddd;
+  }
+}

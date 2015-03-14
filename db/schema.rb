@@ -11,21 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141229152219) do
+ActiveRecord::Schema.define(version: 20150314194135) do
 
   create_table "accounts", force: true do |t|
     t.string "token"
   end
 
-  create_table "bills", force: true do |t|
-    t.string  "name"
-    t.date    "due_date"
-    t.integer "user_id"
-    t.integer "account_id"
-    t.string  "pay_url"
+  create_table "payments", force: true do |t|
+    t.string   "name"
+    t.datetime "last_paid_date"
+    t.datetime "next_pay_date"
+    t.string   "url"
+    t.string   "type"
+    t.integer  "account_id"
+    t.integer  "due_on"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "allow_weekends", default: false
   end
 
-  add_index "bills", ["account_id"], name: "index_bills_on_account_id"
+  add_index "payments", ["account_id"], name: "index_payments_on_account_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

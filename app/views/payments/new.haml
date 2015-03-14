@@ -1,0 +1,34 @@
+= form_for @payment, as: :payment, url: payments_path do |f|
+  = f.hidden_field :type, value: @payment.type
+  - if @payment.errors.any?
+    .alert.alert-danger{ role: 'alert' }
+      %ul.errors
+        - @payment.errors.full_messages.each do |msg|
+          %li= msg
+
+  .panel.panel-default
+    .panel-body
+      .form-group
+        = f.label :name, class: 'control-label'
+        = f.text_field :name, class: 'form-control', autofocus: true, placeholder: "#{@payment.is_a?(Bill) ? 'Bank of America' : 'My Workplace'}"
+
+      - if @payment.is_a? Bill
+        .form-group
+          = f.label :pay_url, 'Pay URL', class: 'control-label'
+          = f.text_field :url, class: 'form-control', placeholder: 'https://bankofamerica.com'
+
+      .form-group
+        - if @payment.is_a? Bill
+          = f.label :due_on, class: 'control-label'
+        - else
+          = f.label :paid_on, class: 'control-label'
+        = f.number_field :due_on, within: 1..31, step: 1, class: 'form-control', placeholder: 'Month day (1-31)'
+
+      .form-group
+        %label
+          = f.check_box :allow_weekends
+          &nbsp; Allow Weekends?
+
+      .form-group
+        = link_to 'Cancel', root_path, class: 'btn btn-default cancel'
+        = f.submit 'Add', class: 'btn btn-primary'

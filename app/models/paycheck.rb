@@ -1,0 +1,2 @@
+class Paycheck < Payment
+end

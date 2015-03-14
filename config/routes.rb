@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations' }
 
-  resources :bills, only: [:index, :create, :new, :destroy] do
+  resources :payments, only: [:index, :create, :new, :destroy] do
     member do
       post 'pay'
     end
   end
 
-  get 'calendar/:token(.:format)', to: 'calendars#show', as: :calendar
+  get 'calendar/:calendar_type/:token(.:format)', to: 'calendars#show', as: :calendar
+  get 'calendar/:token(.:format)', to: 'calendars#show'
 
-  root 'bills#index'
+  root 'home#index'
 end
