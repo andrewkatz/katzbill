@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150314193550) do
+ActiveRecord::Schema.define(version: 20150314194135) do
 
   create_table "accounts", force: true do |t|
     t.string "token"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20150314193550) do
     t.integer  "due_on"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "allow_weekends", default: false
   end
 
   add_index "payments", ["account_id"], name: "index_payments_on_account_id"

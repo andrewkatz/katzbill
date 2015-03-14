@@ -33,6 +33,6 @@ class PaymentsController < ApplicationController
   private
 
   def payment_params
-    params.require(:payment).permit(:id, :name, :due_on, :url, :type)
+    params.require(:payment).permit(:id, :name, :due_on, :url, :type, :allow_weekends)
   end
 end

@@ -14,9 +14,9 @@
           - items.each do |item|
             .row
               .col-md-12
-                = form_for item, url: pay_payment_path(item), method: :post do |f|
+                = form_for item, as: :payment, url: pay_payment_path(item), method: :post do |f|
                   .btn-group.hidden-xs.bill
-                    = link_to item, method: :delete, class: 'btn btn-default', data: { confirm: 'Are you sure?' } do
+                    = link_to payment_path(item), method: :delete, class: 'btn btn-default', data: { confirm: 'Are you sure?' } do
                       %span.glyphicon.glyphicon-trash
                     - if item.is_a? Bill
                       = link_to item.url, class: 'btn btn-default', target: '_blank', disabled: item.url.blank? do
@@ -32,7 +32,7 @@
 
                   .row.visible-xs.bill
                     .col-xs-4
-                      = link_to item, method: :delete, class: 'btn btn-default btn-block', data: { confirm: 'Are you sure?' } do
+                      = link_to payment_path(item), method: :delete, class: 'btn btn-default btn-block', data: { confirm: 'Are you sure?' } do
                         %span.glyphicon.glyphicon-trash
                     - if item.is_a? Bill
                       .col-xs-4

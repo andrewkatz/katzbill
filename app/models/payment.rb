@@ -36,6 +36,10 @@ class Payment < ActiveRecord::Base
       break if (self.next_pay_date + 1.day).month != self.next_pay_date.month
       self.next_pay_date += 1.day
     end
+
+    while !allow_weekends && (next_pay_date.saturday? || next_pay_date.sunday?)
+      self.next_pay_date -= 1.day
+    end
   end
 
   private
