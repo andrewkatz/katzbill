@@ -38,20 +38,42 @@ ul.errors
 
 .bills
 {
+  margin-top: -20px;
+  margin-bottom: -20px;
+
   .row
   {
     border-bottom: 1px solid #eee;
+    margin-left: -20px;
+    margin-right: -20px;
     padding: 20px 0;
-
-    &:first-of-type
-    {
-      padding-top: 0;
-    }
 
     &:last-of-type
     {
       border-bottom: 0;
-      padding-bottom: 0;
+    }
+
+    &.bill
+    {
+      border-left: 5px solid lighten($brand-primary, 35%);
+    }
+
+    &.paycheck
+    {
+      border-left: 5px solid lighten($brand-success, 35%);
+    }
+
+    &.header
+    {
+      background: #fafafa;
+    }
+
+    h4
+    {
+      color: #aaa;
+      font-size: 20px;
+      margin: 0;
+      text-align: center;
     }
   }
 }
