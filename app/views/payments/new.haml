@@ -10,7 +10,7 @@
     .panel-body
       .form-group
         = f.label :name, class: 'control-label'
-        = f.text_field :name, class: 'form-control', autofocus: true
+        = f.text_field :name, class: 'form-control', autofocus: true, placeholder: "#{@payment.is_a?(Bill) ? 'Bank of America' : 'My Workplace'}"
 
       - if @payment.is_a? Bill
         .form-group
@@ -22,12 +22,12 @@
           = f.label :due_on, class: 'control-label'
         - else
           = f.label :paid_on, class: 'control-label'
-        = f.number_field :due_on, { within: 1..31, step: 1, class: 'form-control' }
+        = f.number_field :due_on, within: 1..31, step: 1, class: 'form-control', placeholder: 'Month day (1-31)'
 
       .form-group
         %label
           = f.check_box :allow_weekends
-          Allow Weekends?
+          &nbsp; Allow Weekends?
 
       .form-group
         = link_to 'Cancel', root_path, class: 'btn btn-default cancel'

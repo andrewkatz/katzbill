@@ -16,14 +16,17 @@
               .col-md-12
                 = form_for item, as: :payment, url: pay_payment_path(item), method: :post do |f|
                   .btn-group.hidden-xs.bill
+                    - if item.url.present?
+                      = link_to item.url, class: 'btn btn-default', target: '_blank' do
+                        %span.glyphicon.glyphicon-new-window
                     = link_to payment_path(item), method: :delete, class: 'btn btn-default', data: { confirm: 'Are you sure?' } do
                       %span.glyphicon.glyphicon-trash
                     - if item.is_a? Bill
-                      = link_to item.url, class: 'btn btn-default', target: '_blank', disabled: item.url.blank? do
-                        %span.glyphicon.glyphicon-new-window
-                      = f.submit 'Pay', class: 'btn btn-primary pay'
+                      %button.btn.btn-default.pay{ type: 'submit' }
+                        %span.glyphicon.glyphicon-ok.text-primary
                     - else
-                      = f.submit 'Paid', class: 'btn btn-success pay'
+                      %button.btn.btn-default.pay{ type: 'submit' }
+                        %span.glyphicon.glyphicon-ok.text-success
 
                   .name
                     %strong= item.name
@@ -31,15 +34,18 @@
                   .days-left= item.friendly_days_left
 
                   .row.visible-xs.bill
-                    .col-xs-4
+                    - if item.url.present?
+                      .col-xs-4
+                        = link_to item.url, class: 'btn btn-default btn-block', target: '_blank' do
+                          %span.glyphicon.glyphicon-new-window
+                    %div{ class: "#{ (item.is_a?(Paycheck) || item.url.blank?) ? 'col-xs-6' : 'col-xs-4' }" }
                       = link_to payment_path(item), method: :delete, class: 'btn btn-default btn-block', data: { confirm: 'Are you sure?' } do
                         %span.glyphicon.glyphicon-trash
                     - if item.is_a? Bill
-                      .col-xs-4
-                        = link_to item.url, class: 'btn btn-default btn-block', target: '_blank', disabled: item.url.blank? do
-                          %span.glyphicon.glyphicon-new-window
-                      .col-xs-4
-                        = f.submit 'Pay', class: 'btn btn-primary pay'
+                      %div{ class: "#{ item.url.present? ? 'col-xs-4' : 'col-xs-6' }" }
+                        %button.btn.btn-default.btn-block.pay{ type: 'submit' }
+                          %span.glyphicon.glyphicon-ok.text-primary
                     - else
-                      .col-xs-4
-                        = f.submit 'Paid', class: 'btn btn-success pay'
+                      .col-xs-6
+                        %button.btn.btn-default.btn-block.pay{ type: 'submit' }
+                          %span.glyphicon.glyphicon-ok.text-success
