@@ -13,7 +13,8 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'calendar/:token(.:format)', to: 'calendars#show', as: :calendar
+  get 'calendar/:calendar_type/:token(.:format)', to: 'calendars#show', as: :calendar
+  get 'calendar/:token(.:format)', to: 'calendars#show'
 
   root 'home#index'
 end
