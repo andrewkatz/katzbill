@@ -18,7 +18,10 @@
           = f.text_field :url, class: 'form-control', placeholder: 'https://bankofamerica.com'
 
       .form-group
-        = f.label :due_on, class: 'control-label'
+        - if @payment.is_a? Bill
+          = f.label :due_on, class: 'control-label'
+        - else
+          = f.label :paid_on, class: 'control-label'
         = f.number_field :due_on, { within: 1..31, step: 1, class: 'form-control' }
 
       .form-group
