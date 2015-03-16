@@ -160,3 +160,11 @@ input[type=number] {
     border-bottom: 1px dotted #ddd;
   }
 }
+
+a.ellipsis
+{
+  display: inline-block;
+  max-width: 100%;
+  overflow: auto;
+  text-overflow: ellipsis;
+}

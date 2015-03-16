@@ -8,14 +8,14 @@
     %p Invite a user by having them sign up with the following invite token. Invited users will share all bills with you.
     %pre= resource.account.token
 .panel.panel-default
-  .panel-heading ICal Calendar Feed
+  .panel-heading iCal Calendar Feed
   .panel-body
     %p
       To add your bills to you calendar use the following url:
-      = link_to nil, calendar_url(resource.calendar_token, calendar_type: :bills, format: :ics)
+      = link_to nil, calendar_url(resource.calendar_token, calendar_type: :bills, format: :ics), class: 'ellipsis'
     %p
       To add your paychecks to you calendar use the following url:
-      = link_to nil, calendar_url(resource.calendar_token, calendar_type: :paychecks, format: :ics)
+      = link_to nil, calendar_url(resource.calendar_token, calendar_type: :paychecks, format: :ics), class: 'ellipsis'
 .panel.panel-default
   .panel-heading Email &amp; Password
   .panel-body
