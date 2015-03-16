@@ -4,6 +4,7 @@ class PaymentsController < ApplicationController
 
   def new
     @payment = current_user.account.payments.build(type: params[:type].classify)
+    @form_url = payments_path
 
     render :form
   end
@@ -32,10 +33,19 @@ class PaymentsController < ApplicationController
   end
 
   def edit
+    @form_url = payment_path(@payment)
+
     render :form
   end
 
   def update
+    @payment.assign_attributes(payment_params)
+
+    if @payment.save
+      redirect_to root_path
+    else
+      render :form
+    end
   end
 
   private

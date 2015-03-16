@@ -1,4 +1,4 @@
-= form_for @payment, as: :payment, url: payments_path do |f|
+= form_for @payment, as: :payment, url: @form_url do |f|
   = f.hidden_field :type, value: @payment.type
   - if @payment.errors.any?
     .alert.alert-danger{ role: 'alert' }
