@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations' }
 
-  resources :payments, only: [:index, :create, :new, :destroy] do
+  resources :payments do
     member do
       post 'pay'
     end

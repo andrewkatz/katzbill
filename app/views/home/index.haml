@@ -19,8 +19,8 @@
                     - if item.url.present?
                       = link_to item.url, class: 'btn btn-default', target: '_blank' do
                         %span.glyphicon.glyphicon-new-window
-                    = link_to payment_path(item), method: :delete, class: 'btn btn-default', data: { confirm: 'Are you sure?' } do
-                      %span.glyphicon.glyphicon-trash
+                    = link_to edit_payment_path(item), class: 'btn btn-default' do
+                      %span.glyphicon.glyphicon-pencil
                     - if item.is_a? Bill
                       %button.btn.btn-default.pay{ type: 'submit' }
                         %span.glyphicon.glyphicon-ok.text-primary
@@ -33,14 +33,14 @@
                   .due= item.next_pay_date.strftime('%B %-d')
                   .days-left= item.friendly_days_left
 
-                  .row.visible-xs.bill
+                  %div{ class: "visible-xs row #{item.is_a?(Bill) ? 'bill' : 'paycheck'}" }
                     - if item.url.present?
                       .col-xs-4
                         = link_to item.url, class: 'btn btn-default btn-block', target: '_blank' do
                           %span.glyphicon.glyphicon-new-window
                     %div{ class: "#{ (item.is_a?(Paycheck) || item.url.blank?) ? 'col-xs-6' : 'col-xs-4' }" }
-                      = link_to payment_path(item), method: :delete, class: 'btn btn-default btn-block', data: { confirm: 'Are you sure?' } do
-                        %span.glyphicon.glyphicon-trash
+                      = link_to edit_payment_path(item), class: 'btn btn-default btn-block' do
+                        %span.glyphicon.glyphicon-pencil
                     - if item.is_a? Bill
                       %div{ class: "#{ item.url.present? ? 'col-xs-4' : 'col-xs-6' }" }
                         %button.btn.btn-default.btn-block.pay{ type: 'submit' }
