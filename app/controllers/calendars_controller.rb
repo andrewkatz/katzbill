@@ -14,6 +14,7 @@ class CalendarsController < ApplicationController
     calendar = Icalendar::Calendar.new
 
     items = calendar_type == :paychecks ? user.paychecks : user.bills
+    items = items.order(:next_pay_date)
     items.each do |item|
       event                     = Icalendar::Event.new
       event.dtstart             = item.next_pay_date
