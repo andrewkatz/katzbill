@@ -16,7 +16,7 @@ class CalendarsController < ApplicationController
     items = calendar_type == :paychecks ? user.paychecks : user.bills
     items.each do |item|
       event                     = Icalendar::Event.new
-      event.dtstart             = item.try(:due_date) || item.try(:pay_date)
+      event.dtstart             = item.next_pay_date
       event.dtstart.ical_params = { 'VALUE' => 'DATE' }
       if item.is_a? Paycheck
         event.summary = "#{item.name} pay day"
