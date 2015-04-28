@@ -44,8 +44,6 @@ class Payment < ActiveRecord::Base
     update_next_pay_date if next_pay_date < Time.zone.now
   end
 
-  private
-
   def days_left
     today = Time.zone.now.to_date
     next_pay_date = self.next_pay_date.to_date
@@ -60,6 +58,8 @@ class Payment < ActiveRecord::Base
 
     difference.to_i
   end
+
+  private
 
   def in_past?
     self.next_pay_date.to_date < Time.zone.now.to_date
