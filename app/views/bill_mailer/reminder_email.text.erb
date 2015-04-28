@@ -1,2 +1,2 @@
 Bill: <%= @bill.name %>
-Due: <%= @bill.next_pay_date %> (<%= @bill.days_left %>)
+Due: <%= @bill.next_pay_date.strftime('%B %-d') %> (<%= @bill.days_left %> days)

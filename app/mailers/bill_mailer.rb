@@ -6,7 +6,7 @@ class BillMailer < ActionMailer::Base
 
     mail(
       to: bill.account.users.map(&:email),
-      subject: "#{bill.days_left} until \"#{bill.name}\" is due"
+      subject: "#{bill.days_left} days until \"#{bill.name}\" is due"
     )
   end
 end
