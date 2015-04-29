@@ -1,7 +1,7 @@
 .panel.panel-default
   .panel-heading Account Users
   - if resource.account.users.size > 1
-    %ul.list-group
+    %ul.list-group.users-list
       - resource.account.users.each do |user|
         %li.list-group-item= user.email
   .panel-body

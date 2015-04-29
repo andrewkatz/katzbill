@@ -28,7 +28,6 @@ ul.errors
 
   .row
   {
-    // border-bottom: 1px solid #eee;
     margin-left: -20px;
     margin-right: -20px;
     padding: 20px 0;
@@ -122,9 +121,10 @@ p.bills
   -webkit-appearance: none;
 }
 
-ul.users
+ul.list-group.users-list
 {
-  list-style: none;
+  background: #485563;
+  margin: 15px 15px 0;
 }
 
 a.ellipsis
