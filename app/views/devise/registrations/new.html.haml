@@ -1,6 +1,6 @@
 .panel.panel-default
-  .panel-body
-    = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :role => 'form'}) do |f|
+  = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :role => 'form'}) do |f|
+    .panel-body
       - resource.errors.full_messages.each do |message|
         .alert.alert-warning{ role: 'alert' }= message
       .form-group
@@ -17,4 +17,5 @@
         #invite_token.hidden
           = label_tag :invite_token
           = text_field_tag 'user[invite_token]', nil, class: 'form-control'
+    .panel-footer.text-right
       = f.submit 'Sign up', :class => 'btn btn-primary'

@@ -28,8 +28,7 @@
                       %button.btn.btn-default.pay{ type: 'submit' }
                         %span.glyphicon.glyphicon-usd.text-success
 
-                  .name
-                    %strong= item.name
+                  .name= item.name
                   .due= item.next_pay_date.strftime('%B %-d')
                   .days-left= item.friendly_days_left
 

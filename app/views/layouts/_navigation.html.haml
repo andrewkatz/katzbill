@@ -1,4 +1,4 @@
-%nav.navbar.navbar-inverse
+%nav.navbar.navbar-default
   .container
     .navbar-header
       %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
@@ -13,9 +13,21 @@
           %li= link_to 'Add Bill', new_payment_path(type: :bill)
           %li= link_to 'Add Paycheck', new_payment_path(type: :paycheck)
         %ul.nav.navbar-nav.navbar-right
-          %li= link_to 'Settings', edit_user_registration_path
-          %li= link_to 'Sign Out', destroy_user_session_path, method: :delete
+          %li
+            = link_to edit_user_registration_path, title: "Settings" do
+              %i.glyphicon.glyphicon-cog.hidden-xs
+              %span.visible-xs Settings
+          %li
+            = link_to destroy_user_session_path, method: :delete, title: "Sign Out" do
+              %i.glyphicon.glyphicon-log-out.hidden-xs
+              %span.visible-xs Sign Out
       - else
         %ul.nav.navbar-nav.navbar-right
-          %li= link_to 'Sign Up', new_user_registration_path
-          %li= link_to 'Sign In', new_user_session_path
+          %li
+            = link_to new_user_registration_path, title: "Sign Up" do
+              %i.glyphicon.glyphicon-user.hidden-xs
+              %span.visible-xs Sign Up
+          %li
+            = link_to new_user_session_path, title: "Sign In" do
+              %i.glyphicon.glyphicon-log-in.hidden-xs
+              %span.visible-xs Sign In

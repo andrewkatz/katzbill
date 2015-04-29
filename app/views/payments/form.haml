@@ -7,6 +7,7 @@
           %li= msg
 
   .panel.panel-default
+    .panel-heading Add #{@payment.class.to_s}
     .panel-body
       .form-group
         = f.label :name, class: 'control-label'
@@ -29,13 +30,13 @@
           = f.check_box :allow_weekends
           &nbsp; Allow Weekends?
 
-      .form-group
-        = link_to 'Cancel', root_path, class: 'btn btn-default cancel'
-        = f.submit 'Save', class: 'btn btn-primary'
+    .panel-footer.text-right
+      = link_to 'Cancel', root_path, class: 'btn btn-default cancel'
+      = f.submit 'Save', class: 'btn btn-primary'
 
 - if @payment.persisted?
   .panel.panel-default
     .panel-body
-      = link_to payment_path(@payment), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'text-danger pull-right' do
-        %span.glyphicon.glyphicon-trash
       This will delete this #{@payment.class.to_s.downcase} forever.
+    .panel-footer.text-right
+      = link_to 'Delete', payment_path(@payment), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-sm btn-danger'
