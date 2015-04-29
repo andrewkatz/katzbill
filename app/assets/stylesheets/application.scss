@@ -123,8 +123,12 @@ p.bills
 
 ul.list-group.users-list
 {
-  background: #485563;
   margin: 15px 15px 0;
+
+  li.list-group-item
+  {
+    background: #485563;
+  }
 }
 
 a.ellipsis
