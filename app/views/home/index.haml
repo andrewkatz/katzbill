@@ -1,7 +1,7 @@
 .panel.panel-default
   .panel-body
     - if @items.empty?
-      %p.bills You have no bills or paychecks.
+      %p.no-bills You have no bills or paychecks.
     - else
       .bills
         - @items.group_by { |b| b.next_pay_date.month }.each do |month, items|
