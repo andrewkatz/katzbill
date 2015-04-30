@@ -15,7 +15,7 @@
             %div{ class: "row #{item.is_a?(Bill) ? 'bill' : 'paycheck'}" }
               .col-md-12
                 = form_for item, as: :payment, url: pay_payment_path(item), method: :post do |f|
-                  .btn-group.hidden-xs.bill
+                  .btn-group.bill
                     - if item.url.present?
                       = link_to item.url, class: 'btn btn-default', target: '_blank' do
                         %span.glyphicon.glyphicon-new-window
@@ -31,20 +31,3 @@
                   .name= item.name
                   .due= item.next_pay_date.strftime('%B %-d')
                   .days-left= item.friendly_days_left
-
-                  %div{ class: "visible-xs row #{item.is_a?(Bill) ? 'bill' : 'paycheck'}" }
-                    - if item.url.present?
-                      .col-xs-4
-                        = link_to item.url, class: 'btn btn-default btn-block', target: '_blank' do
-                          %span.glyphicon.glyphicon-new-window
-                    %div{ class: "#{ (item.is_a?(Paycheck) || item.url.blank?) ? 'col-xs-6' : 'col-xs-4' }" }
-                      = link_to edit_payment_path(item), class: 'btn btn-default btn-block' do
-                        %span.glyphicon.glyphicon-pencil
-                    - if item.is_a? Bill
-                      %div{ class: "#{ item.url.present? ? 'col-xs-4' : 'col-xs-6' }" }
-                        %button.btn.btn-default.btn-block.pay{ type: 'submit' }
-                          %span.glyphicon.glyphicon-ok.text-primary
-                    - else
-                      .col-xs-6
-                        %button.btn.btn-default.btn-block.pay{ type: 'submit' }
-                          %span.glyphicon.glyphicon-usd.text-success
