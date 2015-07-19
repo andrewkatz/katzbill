@@ -10,7 +10,7 @@
               - if index == 0
                 .pull-right.text-muted
                   Last checked:
-                  = time_ago_in_words(DateTime.now)
+                  = DateTime.now.in_time_zone('Pacific Time (US & Canada)').strftime("due on %B %d at %I:%M %p")
               - if month == DateTime.now.month
                 %h4 This month
               - else
