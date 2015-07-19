@@ -4,9 +4,13 @@
       %p.no-bills You have no bills or paychecks.
     - else
       .bills
-        - @items.group_by { |b| b.next_pay_date.month }.each do |month, items|
+        - @items.group_by { |b| b.next_pay_date.month }.each_with_index do |(month, items), index|
           .row.header
             .col-md-12
+              - if index == 0
+                .pull-right.text-muted
+                  Last checked:
+                  = time_ago_in_words(DateTime.now)
               - if month == DateTime.now.month
                 %h4 This month
               - else
