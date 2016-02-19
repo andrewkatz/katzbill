@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.1.4'
 
-gem 'rails', '4.1.6'
+gem 'rails', '4.2.1'
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
@@ -15,6 +15,9 @@ gem 'devise'
 gem 'haml-rails'
 gem 'postmark-rails'
 gem 'icalendar'
+gem 'simple_token_authentication', '~> 1.0'
+gem 'active_model_serializers', '~> 0.8.1'
+gem 'rack-cors'
 
 group :development do
   gem 'better_errors'

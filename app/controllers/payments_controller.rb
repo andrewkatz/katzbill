@@ -1,6 +1,21 @@
 class PaymentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_payment, only: [:pay, :destroy, :edit, :update]
+  before_action :set_payment, only: [:pay, :destroy, :edit, :update, :show]
+
+  def index
+    payments = current_user.account.payments.order(:next_pay_date)
+
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: payments, each_serializer: PaymentSerializer
+      end
+    end
+  end
+
+  def show
+    render json: @payment, serializer: PaymentSerializer
+  end
 
   def new
     @payment = current_user.account.payments.build(type: params[:type].classify)
@@ -23,7 +38,12 @@ class PaymentsController < ApplicationController
   def pay
     @payment.pay!
 
-    redirect_to root_path
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      format.json do
+        render json: @payment
+      end
+    end
   end
 
   def destroy

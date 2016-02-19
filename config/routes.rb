@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations' }
 
-  resources :payments, except: [:show] do
+  resources :payments do
     member do
       post 'pay'
     end
@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   get 'calendar/:calendar_type/:token(.:format)', to: 'calendars#show', as: :calendar
   get 'calendar/:token(.:format)', to: 'calendars#show'
+  get 'me', to: 'users#show'
 
   root 'home#index'
 end

@@ -42,6 +42,11 @@
     .panel-footer.text-right
       = f.submit 'Update', :class => 'btn btn-primary'
 .panel.panel-default
+  .panel-heading Authentication Token
+  .panel-body
+    %p Use this for authenticating using the Chrome extension.
+    %pre= resource.authentication_token
+.panel.panel-default
   .panel-heading Delete User
   .panel-body This will not affect the bills attached to the account if other users are still active.
   .panel-footer.text-right

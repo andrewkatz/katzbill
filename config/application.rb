@@ -22,5 +22,16 @@ module Katzbill
 
     config.action_mailer.delivery_method   = :postmark
     config.action_mailer.postmark_settings = { api_key: ENV['POSTMARK_API_KEY'] }
+
+    # CORS
+    logger = -> { Rails.logger }
+    config.middleware.insert_before 0, Rack::Cors, debug: !Rails.env.production?, logger: logger do
+      allow do
+        origins '*'
+        resource '*', headers: :any, methods: [:get, :post, :put, :delete, :options, :head]
+      end
+    end
+
+    config.autoload_paths += %W(#{config.root}/lib)
   end
 end
