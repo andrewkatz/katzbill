@@ -9,7 +9,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '~> 3.2.0'
 gem 'bootswatch-rails'
 gem 'devise'
 gem 'haml-rails'
