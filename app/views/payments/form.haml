@@ -30,6 +30,11 @@
           = f.check_box :allow_weekends
           &nbsp; Allow Weekends?
 
+      .form-group
+        %label
+          = f.check_box :autopay
+          &nbsp; Does this autopay?
+
     .panel-footer.text-right
       = link_to 'Cancel', root_path, class: 'btn btn-default cancel'
       = f.submit 'Save', class: 'btn btn-primary'

@@ -71,7 +71,7 @@ class PaymentsController < ApplicationController
   private
 
   def payment_params
-    params.require(:payment).permit(:id, :name, :due_on, :url, :type, :allow_weekends)
+    params.require(:payment).permit(:id, :name, :due_on, :url, :type, :allow_weekends, :autopay)
   end
 
   def set_payment
