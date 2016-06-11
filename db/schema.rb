@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20160315153527) do
     t.string   "name",                   limit: 255
     t.integer  "account_id"
     t.string   "calendar_token",         limit: 255
-    t.string   "authentication_token"
+    t.string   "authentication_token",   limit: 255
   end
 
   add_index "users", ["account_id"], name: "index_users_on_account_id"
