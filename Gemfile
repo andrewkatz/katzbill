@@ -18,6 +18,7 @@ gem 'icalendar'
 gem 'simple_token_authentication', '~> 1.0'
 gem 'active_model_serializers', '~> 0.8.1'
 gem 'rack-cors'
+gem 'rushover'
 
 group :development do
   gem 'better_errors'

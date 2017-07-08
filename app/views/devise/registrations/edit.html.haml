@@ -17,7 +17,7 @@
       To add your paychecks to you calendar use the following url:
       = link_to nil, calendar_url(resource.calendar_token, calendar_type: :paychecks, format: :ics), class: 'ellipsis'
 .panel.panel-default
-  .panel-heading Email &amp; Password
+  .panel-heading User Settings
   = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :role => 'form'}) do |f|
     .panel-body
       = devise_error_messages!
@@ -27,6 +27,9 @@
         - if devise_mapping.confirmable? && resource.pending_reconfirmation?
           %div
             Currently waiting confirmation for: #{resource.unconfirmed_email}
+      .form-group
+        = f.label :pushover_user_key
+        = f.text_field :pushover_user_key, class: 'form-control'
       %p Leave these fields blank if you don't want to change your password.
       .form-group
         = f.label :password

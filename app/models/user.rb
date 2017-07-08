@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
 
   attr_accessor :invite_token
 
+  scope :with_pushover, -> { where.not(pushover_user_key: nil) }
+
   private
 
   def ensure_account
