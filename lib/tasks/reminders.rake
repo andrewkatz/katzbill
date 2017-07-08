@@ -18,7 +18,7 @@ namespace :reminders do
         if bill.should_send_reminder?
           p "Sending reminder push notification for bill ##{bill.id} to user ##{user.id}"
 
-          title = "#{bill.days_left} #{pluralize(bill.days_left, 'day')} until #{bill.name} is due"
+          title = "#{bill.days_left} #{'day'.pluralize(bill.days_left)} until #{bill.name} is due"
           message = "Due on #{bill.next_pay_date.strftime('%B %d-%')}"
 
           unless client.notify(user.pushover_user_key, message, title: title).ok?
