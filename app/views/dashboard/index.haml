@@ -1,0 +1,37 @@
+.row.last-checked
+  .col-md-12
+    Last checked:
+    = DateTime.now.in_time_zone('Pacific Time (US & Canada)').strftime("%B %d at %I:%M %p")
+.panel.panel-default
+  .panel-body
+    - if @items.empty?
+      %p.no-bills You have no bills or paychecks.
+    - else
+      .bills
+        - @items.group_by { |b| b.next_pay_date.month }.each do |month, items|
+          .row.header
+            .col-md-12
+              - if month == DateTime.now.month
+                %h4 This month
+              - else
+                %h4= Date::MONTHNAMES[month]
+          - items.each do |item|
+            %div{ class: "row #{item.is_a?(Bill) ? 'bill' : 'paycheck'}" }
+              .col-md-12
+                = form_for item, as: :payment, url: pay_payment_path(item), method: :post do |f|
+                  .btn-group.bill
+                    - if item.url.present?
+                      = link_to item.url, class: 'btn btn-default', target: '_blank' do
+                        %span.glyphicon.glyphicon-new-window
+                    = link_to edit_payment_path(item), class: 'btn btn-default' do
+                      %span.glyphicon.glyphicon-pencil
+                    - if item.is_a? Bill
+                      %button.btn.btn-default.pay{ type: 'submit' }
+                        %span.glyphicon.glyphicon-ok.text-primary
+                    - else
+                      %button.btn.btn-default.pay{ type: 'submit' }
+                        %span.glyphicon.glyphicon-usd.text-success
+
+                  .name= item.name
+                  .due= item.next_pay_date.strftime('%B %-d')
+                  .days-left= item.friendly_days_left

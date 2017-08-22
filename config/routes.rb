@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   get 'calendar/:token(.:format)', to: 'calendars#show'
   get 'me', to: 'users#show'
 
+  get 'dashboard', to: 'dashboard#index'
   root 'home#index'
 end
