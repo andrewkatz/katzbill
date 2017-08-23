@@ -1,4 +1,7 @@
 class HomeController < ApplicationController
+  layout 'unauthenticated'
+
+  skip_before_action :authenticate_user_from_token!
   before_action :redirect_if_logged_in
 
   def index

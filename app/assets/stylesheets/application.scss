@@ -10,6 +10,12 @@ body
   -webkit-font-smoothing: inherit;
 }
 
+.row.spaced-row
+{
+  margin-top: 70px;
+  margin-bottom: 70px;
+}
+
 select.form-control
 {
   margin-bottom: 5px;
