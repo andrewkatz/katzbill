@@ -3,7 +3,7 @@ class Payment < ActiveRecord::Base
 
   validates :name, :next_pay_date, :due_on, presence: true
 
-  before_save :adjust_next_pay_date, if: :due_on_changed?
+  before_save :match_due_on, if: :due_on_changed?
 
   def pay
     self.last_paid_date = Time.zone.now
@@ -50,6 +50,11 @@ class Payment < ActiveRecord::Base
   end
 
   private
+
+  def match_due_on
+    set_next_pay_date
+    adjust_next_pay_date
+  end
 
   def set_next_pay_date
     now = Time.zone.now
