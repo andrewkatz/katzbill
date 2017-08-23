@@ -1,47 +1,49 @@
-= form_for @payment, as: :payment, url: @form_url do |f|
-  = f.hidden_field :type, value: @payment.type
-  - if @payment.errors.any?
-    .alert.alert-danger{ role: 'alert' }
-      %ul.errors
-        - @payment.errors.full_messages.each do |msg|
-          %li= msg
+.row
+  .col-md-6.col-md-push-3
+    = form_for @payment, as: :payment, url: @form_url do |f|
+      = f.hidden_field :type, value: @payment.type
+      - if @payment.errors.any?
+        .alert.alert-danger{ role: 'alert' }
+          %ul.errors
+            - @payment.errors.full_messages.each do |msg|
+              %li= msg
 
-  .panel.panel-default
-    .panel-heading Add #{@payment.class.to_s}
-    .panel-body
-      .form-group
-        = f.label :name, class: 'control-label'
-        = f.text_field :name, class: 'form-control', autofocus: true, placeholder: "#{@payment.is_a?(Bill) ? 'Bank of America' : 'My Workplace'}"
+      .panel.panel-default
+        .panel-heading Add #{@payment.class.to_s}
+        .panel-body
+          .form-group
+            = f.label :name, class: 'control-label'
+            = f.text_field :name, class: 'form-control', autofocus: true, placeholder: "#{@payment.is_a?(Bill) ? 'Bank of America' : 'My Workplace'}"
 
-      - if @payment.is_a? Bill
-        .form-group
-          = f.label :pay_url, 'Pay URL', class: 'control-label'
-          = f.text_field :url, class: 'form-control', placeholder: 'https://bankofamerica.com'
+          - if @payment.is_a? Bill
+            .form-group
+              = f.label :pay_url, 'Pay URL', class: 'control-label'
+              = f.text_field :url, class: 'form-control', placeholder: 'https://bankofamerica.com'
 
-      .form-group
-        - if @payment.is_a? Bill
-          = f.label :due_on, class: 'control-label'
-        - else
-          = f.label :paid_on, class: 'control-label'
-        = f.number_field :due_on, within: 1..31, step: 1, class: 'form-control', placeholder: 'Month day (1-31)'
+          .form-group
+            - if @payment.is_a? Bill
+              = f.label :due_on, class: 'control-label'
+            - else
+              = f.label :paid_on, class: 'control-label'
+            = f.number_field :due_on, within: 1..31, step: 1, class: 'form-control', placeholder: 'Month day (1-31)'
 
-      .form-group
-        %label
-          = f.check_box :allow_weekends
-          &nbsp; Allow Weekends?
+          .form-group
+            %label
+              = f.check_box :allow_weekends
+              &nbsp; Allow Weekends?
 
-      .form-group
-        %label
-          = f.check_box :autopay
-          &nbsp; Does this autopay?
+          .form-group
+            %label
+              = f.check_box :autopay
+              &nbsp; Does this autopay?
 
-    .panel-footer.text-right
-      = link_to 'Cancel', root_path, class: 'btn btn-default cancel'
-      = f.submit 'Save', class: 'btn btn-primary'
+        .panel-footer.text-right
+          = link_to 'Cancel', root_path, class: 'btn btn-default cancel'
+          = f.submit 'Save', class: 'btn btn-primary'
 
-- if @payment.persisted?
-  .panel.panel-default
-    .panel-body
-      This will delete this #{@payment.class.to_s.downcase} forever.
-    .panel-footer.text-right
-      = link_to 'Delete', payment_path(@payment), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-sm btn-danger'
+    - if @payment.persisted?
+      .panel.panel-default
+        .panel-body
+          This will delete this #{@payment.class.to_s.downcase} forever.
+        .panel-footer.text-right
+          = link_to 'Delete', payment_path(@payment), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-sm btn-danger'

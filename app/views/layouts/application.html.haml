@@ -35,9 +35,7 @@
       = render 'layouts/navigation'
     %main{ role: 'main' }
       .container
-        .row
-          .col-md-6.col-md-push-3
-            = render 'layouts/messages'
-            = yield
+        = render 'layouts/messages'
+        = yield
 
     = javascript_include_tag 'application'
