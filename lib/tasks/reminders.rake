@@ -16,13 +16,13 @@ namespace :reminders do
     User.with_pushover.find_each do |user|
       user.bills.find_each do |bill|
         if bill.should_send_reminder?
-          p "Sending reminder push notification for bill ##{bill.id} to user ##{user.id}"
+          Rails.logger.info "Sending reminder push notification for bill ##{bill.id} to user ##{user.id}"
 
           title = "#{bill.days_left} #{'day'.pluralize(bill.days_left)} until #{bill.name} is due"
           message = "Due on #{bill.next_pay_date.strftime('%B %-d')}"
 
           unless client.notify(user.pushover_user_key, message, title: title).ok?
-            p "Failed to send push notification for bill ##{bill.id} to user ##{user.id}"
+            Rails.logger.error "Failed to send push notification for bill ##{bill.id} to user ##{user.id}"
           end
         end
       end
