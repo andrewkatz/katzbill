@@ -11,7 +11,10 @@ namespace :reminders do
 
   desc 'Send out reminder push notifications'
   task pushover: :environment do
+    Rails.logger.info 'Sending push notifications'
+
     client = Rushover::Client.new(ENV['PUSHOVER_API_TOKEN'])
+    Rails.logger.info 'Pushover client intitialized'
 
     User.with_pushover.find_each do |user|
       user.bills.find_each do |bill|
