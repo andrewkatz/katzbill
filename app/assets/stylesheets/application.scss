@@ -12,8 +12,8 @@ body
 
 .row.spaced-row
 {
-  margin-top: 70px;
-  margin-bottom: 70px;
+  margin-bottom: 40px;
+  margin-top: 40px;
 }
 
 select.form-control
@@ -158,4 +158,44 @@ a.ellipsis
   font-size: 12px;
   margin-bottom: 20px;
   text-align: center;
+}
+
+.home-row
+{
+  background: #eee;
+
+  &.top
+  {
+    margin-top: -30px;
+  }
+
+  &.colored
+  {
+    background: #485563;
+    padding: 70px 20px;
+
+    &.other
+    {
+      background: #454545;
+    }
+  }
+}
+
+.home-story
+{
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 50px;
+}
+
+.jumbotron
+{
+  background: none;
+  margin-bottom: 50px;
+  margin-top: 50px;
+
+  h1, p
+  {
+    color: #777;
+  }
 }
