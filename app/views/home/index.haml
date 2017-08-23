@@ -1,37 +1,34 @@
-.row.last-checked
-  .col-md-12
-    Last checked:
-    = DateTime.now.in_time_zone('Pacific Time (US & Canada)').strftime("%B %d at %I:%M %p")
-.panel.panel-default
-  .panel-body
-    - if @items.empty?
-      %p.no-bills You have no bills or paychecks.
-    - else
-      .bills
-        - @items.group_by { |b| b.next_pay_date.month }.each do |month, items|
-          .row.header
-            .col-md-12
-              - if month == DateTime.now.month
-                %h4 This month
-              - else
-                %h4= Date::MONTHNAMES[month]
-          - items.each do |item|
-            %div{ class: "row #{item.is_a?(Bill) ? 'bill' : 'paycheck'}" }
-              .col-md-12
-                = form_for item, as: :payment, url: pay_payment_path(item), method: :post do |f|
-                  .btn-group.bill
-                    - if item.url.present?
-                      = link_to item.url, class: 'btn btn-default', target: '_blank' do
-                        %span.glyphicon.glyphicon-new-window
-                    = link_to edit_payment_path(item), class: 'btn btn-default' do
-                      %span.glyphicon.glyphicon-pencil
-                    - if item.is_a? Bill
-                      %button.btn.btn-default.pay{ type: 'submit' }
-                        %span.glyphicon.glyphicon-ok.text-primary
-                    - else
-                      %button.btn.btn-default.pay{ type: 'submit' }
-                        %span.glyphicon.glyphicon-usd.text-success
+.row.home-row.top
+  .jumbotron
+    %h1.display-3.text-center Bills are hard
+    %p.lead.text-center
+      Make them easy. Sign up and get happy.
+    %p.lead.text-center
+      = link_to 'Sign Up Now', new_user_registration_path, title: 'Sign Up', class: 'btn btn-primary btn-lg'
 
-                  .name= item.name
-                  .due= item.next_pay_date.strftime('%B %-d')
-                  .days-left= item.friendly_days_left
+.row.home-row.colored
+  .col-md-4.text-center
+    %h1.glyphicon.glyphicon-thumbs-up
+    %h3 Simple and straight-forward
+    %p See your bills and paychecks at a glance, so you are confident nothing is slipping through the cracks.
+  .col-md-4.text-center
+    %h1.glyphicon.glyphicon-lock
+    %h3 Safe
+    %p No need to connect your bank accounts or fill in any other personal information.
+  .col-md-4.text-center
+    %h1.glyphicon.glyphicon-heart-empty
+    %h3 Always on top of it
+    %p Automatic notifications to your phone and inbox, so you never miss a bill.
+
+.row.home-row.colored.other
+  .col-md-8.col-md-push-2
+    %p.home-story
+      Staying on top of your bills is unpleasant. With all the different dues dates, frequencies,
+      and minimum payments, it's nearly impossible to pay everything on time without going insane!
+      That's why we built Bills &amp; Stuff. We didn't want a complicated solution that tried
+      to connect our bank accounts, we just wanted a simple app that tracked everything regardless
+      of the complexity and notified us when to pay it.
+    %p.lead.text-center
+      Feel like freeing up some time?
+    %p.text-center
+      = link_to 'Sign Up Now', new_user_registration_path, title: 'Sign Up', class: 'btn btn-primary btn-lg'

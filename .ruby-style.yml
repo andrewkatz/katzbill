@@ -3,6 +3,9 @@ AllCops:
     - "vendor/**/*"
     - "db/schema.rb"
   UseCache: false
+  TargetRubyVersion: 2.2
+Metrics/BlockLength:
+  ExcludedMethods: ['describe', 'context', 'it']
 Style/CollectionMethods:
   Description: Preferred collection methods.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#map-find-select-reduce-size
@@ -11,7 +14,9 @@ Style/CollectionMethods:
     collect: map
     collect!: map!
     find_all: select
+    reduce:
     inject: reduce
+    find:
     detect: find
 Style/DotPosition:
   Description: Checks the position of the dot in multi-line method calls.
@@ -240,6 +245,12 @@ Style/WhenThen:
   Description: Use when x then ... for one-line cases.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#one-line-cases
   Enabled: true
+Style/SpaceInsidePercentLiteralDelimiters:
+  Description: 'No unnecessary spaces inside delimiters of %i/%w/%x literals.'
+  Enabled: false
+Style/SpaceInLambdaLiteral:
+  Description: 'Checks for spaces in lambda literals.'
+  Enabled: false
 Lint/EachWithObjectArgument:
   Description: Check for immutable argument given to each_with_object.
   Enabled: true
