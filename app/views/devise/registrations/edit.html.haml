@@ -1,56 +1,58 @@
-.panel.panel-default
-  .panel-heading Account Users
-  - if resource.account.users.size > 1
-    %ul.list-group.users-list
-      - resource.account.users.each do |user|
-        %li.list-group-item= user.email
-  .panel-body
-    %p Invite a user by having them sign up with the following invite token. Invited users will share all bills with you.
-    %pre= resource.account.token
-.panel.panel-default
-  .panel-heading iCal Calendar Feed
-  .panel-body
-    %p
-      To add your bills to you calendar use the following url:
-      = link_to nil, calendar_url(resource.calendar_token, calendar_type: :bills, format: :ics), class: 'ellipsis'
-    %p
-      To add your paychecks to you calendar use the following url:
-      = link_to nil, calendar_url(resource.calendar_token, calendar_type: :paychecks, format: :ics), class: 'ellipsis'
-.panel.panel-default
-  .panel-heading User Settings
-  = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :role => 'form'}) do |f|
-    .panel-body
-      = devise_error_messages!
-      .form-group
-        = f.label :email
-        = f.email_field :email, class: 'form-control'
-        - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-          %div
-            Currently waiting confirmation for: #{resource.unconfirmed_email}
-      .form-group
-        = f.label :pushover_user_key
-        = f.text_field :pushover_user_key, class: 'form-control'
-      %p Leave these fields blank if you don't want to change your password.
-      .form-group
-        = f.label :password
-        = f.password_field :password, :autocomplete => 'off', class: 'form-control'
-      .form-group
-        = f.label :password_confirmation
-        = f.password_field :password_confirmation, class: 'form-control'
-      %fieldset
-        %p You must enter your current password to make changes.
-        .form-group
-          = f.label :current_password
-          = f.password_field :current_password, class: 'form-control'
-    .panel-footer.text-right
-      = f.submit 'Update', :class => 'btn btn-primary'
-.panel.panel-default
-  .panel-heading Authentication Token
-  .panel-body
-    %p Use this for authenticating using the Chrome extension.
-    %pre= resource.authentication_token
-.panel.panel-default
-  .panel-heading Delete User
-  .panel-body This will not affect the bills attached to the account if other users are still active.
-  .panel-footer.text-right
-    = button_to "Delete my user", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-sm btn-danger'
+.row
+  .col-md-6.col-md-push-3
+    .panel.panel-default
+      .panel-heading Account Users
+      - if resource.account.users.size > 1
+        %ul.list-group.users-list
+          - resource.account.users.each do |user|
+            %li.list-group-item= user.email
+      .panel-body
+        %p Invite a user by having them sign up with the following invite token. Invited users will share all bills with you.
+        %pre= resource.account.token
+    .panel.panel-default
+      .panel-heading iCal Calendar Feed
+      .panel-body
+        %p
+          To add your bills to you calendar use the following url:
+          = link_to nil, calendar_url(resource.calendar_token, calendar_type: :bills, format: :ics), class: 'ellipsis'
+        %p
+          To add your paychecks to you calendar use the following url:
+          = link_to nil, calendar_url(resource.calendar_token, calendar_type: :paychecks, format: :ics), class: 'ellipsis'
+    .panel.panel-default
+      .panel-heading User Settings
+      = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :role => 'form'}) do |f|
+        .panel-body
+          = devise_error_messages!
+          .form-group
+            = f.label :email
+            = f.email_field :email, class: 'form-control'
+            - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+              %div
+                Currently waiting confirmation for: #{resource.unconfirmed_email}
+          .form-group
+            = f.label :pushover_user_key
+            = f.text_field :pushover_user_key, class: 'form-control'
+          %p Leave these fields blank if you don't want to change your password.
+          .form-group
+            = f.label :password
+            = f.password_field :password, :autocomplete => 'off', class: 'form-control'
+          .form-group
+            = f.label :password_confirmation
+            = f.password_field :password_confirmation, class: 'form-control'
+          %fieldset
+            %p You must enter your current password to make changes.
+            .form-group
+              = f.label :current_password
+              = f.password_field :current_password, class: 'form-control'
+        .panel-footer.text-right
+          = f.submit 'Update', :class => 'btn btn-primary'
+    .panel.panel-default
+      .panel-heading Authentication Token
+      .panel-body
+        %p Use this for authenticating using the Chrome extension.
+        %pre= resource.authentication_token
+    .panel.panel-default
+      .panel-heading Delete User
+      .panel-body This will not affect the bills attached to the account if other users are still active.
+      .panel-footer.text-right
+        = button_to "Delete my user", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-sm btn-danger'
