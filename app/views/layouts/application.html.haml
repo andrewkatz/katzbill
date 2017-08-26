@@ -20,6 +20,32 @@
         ga('send', 'pageview');
 
       :javascript
+        /* <![CDATA[ */
+        goog_snippet_vars = function() {
+          var w = window;
+          w.google_conversion_id = 1039730365;
+          w.google_conversion_label = "WlyxCMnjl3QQvY3k7wM";
+          w.google_remarketing_only = false;
+        }
+        // DO NOT CHANGE THE CODE BELOW.
+        goog_report_conversion = function(url) {
+          goog_snippet_vars();
+          window.google_conversion_format = "3";
+          var opt = new Object();
+          opt.onload_callback = function() {
+          if (typeof(url) != 'undefined') {
+            window.location = url;
+          }
+        }
+        var conv_handler = window['google_trackConversion'];
+        if (typeof(conv_handler) == 'function') {
+          conv_handler(opt);
+        }
+        }
+        /* ]]> */
+      %script{type: "text/javascript" src:"//www.googleadservices.com/pagead/conversion_async.js"}
+
+      :javascript
         !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
         n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
         n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
