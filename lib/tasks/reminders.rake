@@ -1,32 +1,37 @@
 namespace :reminders do
   desc 'Send out reminder emails'
   task email: :environment do
-    Bill.find_each do |bill|
-      if bill.should_send_reminder?
-        p "Sending reminder email for bill ##{bill.id}"
-        BillMailer.reminder_email(bill).deliver
+    User.notifiable_by_email.find_each do |user|
+      user.bills.find_each do |bill|
+        if bill.should_send_reminder?
+          puts "Sending reminder email for bill ##{bill.id} to user ##{user.id}"
+          BillMailer.reminder_email(user, bill).deliver
+        end
       end
     end
   end
 
   desc 'Send out reminder push notifications'
   task pushover: :environment do
-    puts 'Sending push notifications'
-
-    client = Rushover::Client.new(ENV['PUSHOVER_API_TOKEN'])
-    puts 'Pushover client intitialized'
-
-    User.with_pushover.find_each do |user|
+    notifier = PushNotifier.new
+    User.notifiable_by_push.find_each do |user|
       user.bills.find_each do |bill|
         if bill.should_send_reminder?
           puts "Sending reminder push notification for bill ##{bill.id} to user ##{user.id}"
+          notifier.notify(user, bill)
+        end
+      end
+    end
+  end
 
-          title = "#{bill.days_left} #{'day'.pluralize(bill.days_left)} until #{bill.name} is due"
-          message = "Due on #{bill.next_pay_date.strftime('%B %-d')}"
-
-          unless client.notify(user.pushover_user_key, message, title: title).ok?
-            puts "Failed to send push notification for bill ##{bill.id} to user ##{user.id}"
-          end
+  desc 'Send out reminder SMS notifications'
+  task sms: :environment do
+    notifier = SMSNotifier.new
+    User.notifiable_by_sms.find_each do |user|
+      user.bills.find_each do |bill|
+        if bill.should_send_reminder?
+          puts "Sending reminder SMS notification for bill ##{bill.id} to user ##{user.id}"
+          notifier.notify(user, bill)
         end
       end
     end

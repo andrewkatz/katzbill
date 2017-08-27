@@ -18,8 +18,10 @@ gem 'simple_token_authentication', '~> 1.0'
 gem 'active_model_serializers', '~> 0.8.1'
 gem 'rack-cors'
 gem 'rushover'
+gem 'phonelib'
 
 group :development do
+  gem 'rubocop'
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]
   gem 'foreman'
@@ -38,4 +40,5 @@ group :production do
   gem 'pg'
   gem 'rails_12factor'
   gem 'sendgrid-ruby'
+  gem 'twilio-ruby'
 end

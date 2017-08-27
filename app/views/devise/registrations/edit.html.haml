@@ -30,8 +30,23 @@
               %div
                 Currently waiting confirmation for: #{resource.unconfirmed_email}
           .form-group
-            = f.label :pushover_user_key
+            %label.control-label Email Notifications
+            = f.check_box :notify_email
+          .form-padding
+          .form-group
+            = f.label :phone
+            = f.phone_field :phone, class: 'form-control'
+          .form-group
+            %label.control-label SMS Notifications
+            = f.check_box :notify_sms
+          .form-padding
+          .form-group
+            %label.control-label Pushover User Key
             = f.text_field :pushover_user_key, class: 'form-control'
+          .form-group
+            = f.label :push_notifications
+            = f.check_box :notify_push
+          .form-padding
           %p Leave these fields blank if you don't want to change your password.
           .form-group
             = f.label :password

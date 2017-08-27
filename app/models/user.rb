@@ -15,10 +15,15 @@ class User < ActiveRecord::Base
   before_validation :ensure_calendar_token
 
   validates :calendar_token, presence: true
+  validates :phone, phone: { possible: true, allow_blank: true }
 
   attr_accessor :invite_token
 
-  scope :with_pushover, -> { where.not(pushover_user_key: nil) }
+  scope :notifiable_by_email, -> { where(notify_email: true) }
+  scope :notifiable_by_sms, -> { where(notify_sms: true).where.not(phone: nil) }
+  scope :notifiable_by_push, -> { where(notify_push: true).where.not(pushover_user_key: nil) }
+
+  before_save :clean_phone
 
   private
 
@@ -39,5 +44,11 @@ class User < ActiveRecord::Base
 
   def ensure_calendar_token
     self.calendar_token = SecureRandom.urlsafe_base64(16) unless calendar_token?
+  end
+
+  def clean_phone
+    return if !phone_changed? || phone.blank?
+
+    self.phone = Phonelib.parse(phone).sanitized
   end
 end
