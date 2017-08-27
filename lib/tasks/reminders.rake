@@ -25,7 +25,7 @@ namespace :reminders do
   end
 
   desc 'Send out reminder SMS notifications'
-  task pushover: :environment do
+  task sms: :environment do
     notifier = SMSNotifier.new
     User.notifiable_by_sms.find_each do |user|
       user.bills.find_each do |bill|
