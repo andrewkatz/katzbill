@@ -18,6 +18,7 @@ gem 'simple_token_authentication', '~> 1.0'
 gem 'active_model_serializers', '~> 0.8.1'
 gem 'rack-cors'
 gem 'rushover'
+gem 'phonelib'
 
 group :development do
   gem 'better_errors'
@@ -38,4 +39,5 @@ group :production do
   gem 'pg'
   gem 'rails_12factor'
   gem 'sendgrid-ruby'
+  gem 'twilio-ruby'
 end
