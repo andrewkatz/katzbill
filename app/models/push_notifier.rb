@@ -1,4 +1,4 @@
-class PushNotifier
+class PushNotifier < Notifier
   def notify(user, bill)
     notified = client.notify(user.pushover_user_key, message(bill), title: title(bill)).ok?
     puts "Failed to send push notification for bill:#{bill.id} user:#{user.id}" unless notified
