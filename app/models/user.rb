@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
 
   before_validation :ensure_account
   before_validation :ensure_calendar_token
+  after_destroy :destroy_account
 
   validates :calendar_token, presence: true
   validates :phone, phone: { possible: true, allow_blank: true }
@@ -48,5 +49,9 @@ class User < ActiveRecord::Base
     return if !phone_changed? || phone.blank?
 
     self.phone = Phonelib.parse(phone).sanitized
+  end
+
+  def destroy_account
+    account.destroy if account.users.count.zero?
   end
 end
