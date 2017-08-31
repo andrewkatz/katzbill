@@ -16,7 +16,7 @@
             = f.password_field :password_confirmation, class: 'form-control'
           .form-group#cc-form-group
             = f.label :credit_card
-            #cc-form.card-js{ data: { stripe: 'true' } }
+            .card-js#cc-form{ data: { stripe: 'true' } }
           .form-group
             %a#invited{ href: '#' } I have an invite token
             #invite_token.hidden
