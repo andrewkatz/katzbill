@@ -1,7 +1,7 @@
 .row
   .col-md-6.col-md-push-3
     .panel.panel-default
-      = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :role => 'form', onsubmit: 'fbq("track", "CompleteRegistation", {}); ga("send", "event", "SignUp", "Click"); goog_report_conversion(); return true;'}) do |f|
+      = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :role => 'form', id: 'signup-form' }) do |f|
         .panel-body
           - resource.errors.full_messages.each do |message|
             .alert.alert-warning{ role: 'alert' }= message
@@ -14,6 +14,9 @@
           .form-group
             = f.label :password_confirmation
             = f.password_field :password_confirmation, class: 'form-control'
+          .form-group#cc-form-group
+            = f.label :credit_card
+            #cc-form.card-js{ data: { stripe: 'true' } }
           .form-group
             %a#invited{ href: '#' } I have an invite token
             #invite_token.hidden
@@ -21,3 +24,49 @@
               = text_field_tag 'user[invite_token]', nil, class: 'form-control'
         .panel-footer.text-right
           = f.submit 'Sign up', :class => 'btn btn-primary'
+
+- content_for :footer do
+  :javascript
+    var invitedLink = $('a#invited');
+    var ccInput = $('#cc-form-group');
+    invitedLink.click(function(event) {
+      event.preventDefault();
+
+      invitedLink.toggleClass('hidden');
+
+      var inviteTokenGroup = $('#invite_token');
+      ccInput.toggleClass('hidden');
+      inviteTokenGroup.toggleClass('hidden');
+      inviteTokenGroup.children('input').focus();
+    });
+
+    var form = $('#signup-form');
+    form.submit(function(e) {
+      e.preventDefault();
+      if (typeof(fbq) !== 'undefined') { fbq("track", "CompleteRegistation", {}); }
+      if (typeof(ga) !== 'undefined') { ga("send", "event", "SignUp", "Click"); }
+      if (typeof(goog_report_conversion) !== 'undefined') { goog_report_conversion(); }
+
+      form.find('input[type=submit]').prop('disabled', true);
+
+      if (!ccInput.hasClass('hidden')) {
+        Stripe.card.createToken(form, stripeResponseHandler);
+
+        return false;
+      }
+
+      form.get(0).submit();
+    });
+
+    function stripeResponseHandler(status, response) {
+      var form = $('#signup-form');
+
+      if (response.error) {
+        alert('Something went wrong! ' + response.error.message);
+        form.find('input[type=submit]').prop('disabled', false);
+      } else {
+        var token = response.id;
+        form.append($('<input type="hidden" name="stripe_token">').val(token))
+        form.get(0).submit();
+      }
+    }

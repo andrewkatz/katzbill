@@ -19,11 +19,13 @@ gem 'active_model_serializers', '~> 0.8.1'
 gem 'rack-cors'
 gem 'rushover'
 gem 'phonelib'
+gem 'card-js-rails', '~> 1.0'
+gem 'stripe'
 
 group :development do
   gem 'rubocop'
   gem 'better_errors'
-  gem 'binding_of_caller', :platforms=>[:mri_21]
+  gem 'binding_of_caller'
   gem 'foreman'
   gem 'html2haml'
   gem 'quiet_assets'
