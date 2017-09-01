@@ -1,4 +1,4 @@
-class SMSNotifier
+class SMSNotifier < Notifier
   def notify(user, bill)
     client.messages.create(
       from: ENV['TWILIO_PHONE'],

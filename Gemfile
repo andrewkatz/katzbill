@@ -19,6 +19,7 @@ gem 'active_model_serializers', '~> 0.8.1'
 gem 'rack-cors'
 gem 'rushover'
 gem 'phonelib'
+gem 'pg'
 
 group :development do
   gem 'rubocop'
@@ -33,11 +34,10 @@ end
 group :development, :test do
   gem 'pry-rails'
   gem 'pry-rescue'
-  gem 'sqlite3'
+  gem 'mailcatcher'
 end
 
 group :production do
-  gem 'pg'
   gem 'rails_12factor'
   gem 'sendgrid-ruby'
   gem 'twilio-ruby'
