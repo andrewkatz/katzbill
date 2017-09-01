@@ -1,33 +1,29 @@
-ActiveAdmin.register_page "Dashboard" do
+ActiveAdmin.register_page 'Dashboard' do
+  menu priority: 1, label: proc{ I18n.t('active_admin.dashboard') }
 
-  menu priority: 1, label: proc{ I18n.t("active_admin.dashboard") }
+  content title: proc{ I18n.t('active_admin.dashboard') } do
+    columns do
+      column do
+        panel 'User Metrics' do
+          ul do
+            li "#{User.count} users"
+            li "#{User.where('created_at >= ?', Time.zone.now.beginning_of_day).count} new users today"
+            li "#{User.where('created_at >= ?', 7.days.ago).count} new users in past 7 days"
+          end
+        end
+      end
 
-  content title: proc{ I18n.t("active_admin.dashboard") } do
-    div class: "blank_slate_container", id: "dashboard_default_message" do
-      span class: "blank_slate" do
-        span I18n.t("active_admin.dashboard_welcome.welcome")
-        small I18n.t("active_admin.dashboard_welcome.call_to_action")
+      column do
+        panel 'Payment Metrics' do
+          ul do
+            li "#{Payment.count} payments"
+            li "#{Bill.count} bills"
+            li "#{Paycheck.count} paychecks"
+            li "#{Payment.where('created_at >= ?', Time.zone.now.beginning_of_day).count} new payments today"
+            li "#{Payment.where('created_at >= ?', 7.days.ago).count} new payments in past 7 days"
+          end
+        end
       end
     end
-
-    # Here is an example of a simple dashboard with columns and panels.
-    #
-    # columns do
-    #   column do
-    #     panel "Recent Posts" do
-    #       ul do
-    #         Post.recent(5).map do |post|
-    #           li link_to(post.title, admin_post_path(post))
-    #         end
-    #       end
-    #     end
-    #   end
-
-    #   column do
-    #     panel "Info" do
-    #       para "Welcome to ActiveAdmin."
-    #     end
-    #   end
-    # end
-  end # content
+  end
 end
