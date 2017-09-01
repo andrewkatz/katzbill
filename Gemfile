@@ -20,6 +20,7 @@ gem 'rack-cors'
 gem 'rushover'
 gem 'phonelib'
 gem 'pg'
+gem 'activeadmin'
 
 group :development do
   gem 'rubocop'
