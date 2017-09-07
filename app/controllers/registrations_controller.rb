@@ -4,17 +4,17 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     super do
       if sign_up_params[:invite_token].blank? && resource.valid?
-        begin
-          account = resource.account
-          customer = Stripe::Customer.create(
-            source: stripe_params[:stripe_token],
-            plan: PLAN_ID,
-            email: resource.email
-          )
-          account.update! stripe_customer_id: customer.id
-        rescue Stripe::CardError, Stripe::InvalidRequestError => e
-          resource.errors.add :credit_card, e.message
-        end
+        # begin
+        #   account = resource.account
+        #   customer = Stripe::Customer.create(
+        #     source: stripe_params[:stripe_token],
+        #     plan: PLAN_ID,
+        #     email: resource.email
+        #   )
+        #   account.update! stripe_customer_id: customer.id
+        # rescue Stripe::CardError, Stripe::InvalidRequestError => e
+        #   resource.errors.add :credit_card, e.message
+        # end
       end
     end
   end

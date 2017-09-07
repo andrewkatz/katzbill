@@ -17,6 +17,6 @@ class Account < ActiveRecord::Base
   end
 
   def destroy_stripe_subscription
-    Stripe::Customer.retrieve(stripe_customer_id).delete
+    # Stripe::Customer.retrieve(stripe_customer_id).delete
   end
 end

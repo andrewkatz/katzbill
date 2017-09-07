@@ -49,11 +49,11 @@
 
       form.find('input[type=submit]').prop('disabled', true);
 
-      if (!ccInput.hasClass('hidden')) {
-        Stripe.card.createToken(form, stripeResponseHandler);
+      // if (!ccInput.hasClass('hidden')) {
+      //   Stripe.card.createToken(form, stripeResponseHandler);
 
-        return false;
-      }
+      //   return false;
+      // }
 
       form.get(0).submit();
     });
