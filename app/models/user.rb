@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   before_validation :ensure_account
   before_validation :ensure_calendar_token
   after_destroy :destroy_account
+  after_create :set_account_owner
 
   validates :calendar_token, presence: true
   validates :phone, phone: { possible: true, allow_blank: true }
@@ -41,6 +42,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def set_account_owner
+    account.update! owner: self if account.owner.nil?
+  end
+
   def ensure_calendar_token
     self.calendar_token = SecureRandom.urlsafe_base64(16) unless calendar_token?
   end
@@ -52,6 +57,6 @@ class User < ActiveRecord::Base
   end
 
   def destroy_account
-    account.destroy if account.users.count.zero?
+    account.destroy if account.owner == self
   end
 end

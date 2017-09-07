@@ -68,6 +68,12 @@
         %pre= resource.authentication_token
     .panel.panel-default
       .panel-heading Delete User
-      .panel-body This will not affect the bills attached to the account if other users are still active.
+      .panel-body
+        - if resource.account.owner == resource
+          This will delete your account and
+          %strong all
+          users belonging to your account.
+        - else
+          This will delete your account, but leave all other user's on the account intact.
       .panel-footer.text-right
-        = button_to "Delete my user", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-sm btn-danger'
+        = button_to "Delete my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-sm btn-danger'
