@@ -22,6 +22,7 @@ gem 'phonelib'
 gem 'pg'
 gem 'card-js-rails', '~> 1.0'
 gem 'stripe'
+gem 'activeadmin'
 
 group :development do
   gem 'rubocop'
