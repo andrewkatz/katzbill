@@ -15,6 +15,8 @@ ActiveRecord::Schema.define(version: 20170907053803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "plperl"
+  enable_extension "plperlu"
 
   create_table "accounts", force: :cascade do |t|
     t.string  "token"
