@@ -19,6 +19,12 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def new
+    super do
+      @price = params[:price] || 5
+    end
+  end
+
   protected
 
   def stripe_params
