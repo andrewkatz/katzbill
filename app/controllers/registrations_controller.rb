@@ -21,7 +21,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   def new
     super do
-      @price = params[:price] || 5
+      @price = params[:price] || 1
     end
   end
 
