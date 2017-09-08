@@ -11,16 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170901060847) do
+ActiveRecord::Schema.define(version: 20170907053803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "plperl"
-  enable_extension "plperlu"
 
   create_table "accounts", force: :cascade do |t|
-    t.string "token"
+    t.string  "token"
+    t.string  "stripe_customer_id"
+    t.integer "owner_id"
   end
+
+  add_index "accounts", ["owner_id"], name: "index_accounts_on_owner_id", using: :btree
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"

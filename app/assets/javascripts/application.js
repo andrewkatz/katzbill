@@ -10,18 +10,9 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
+//= require jquery3
 //= require jquery_ujs
 //= require bootstrap-sprockets
+//= require card-js
 //= require_tree .
 
-var invitedLink = $('a#invited');
-invitedLink.click(function(event) {
-  event.preventDefault();
-
-  invitedLink.toggleClass('hidden');
-
-  var inviteTokenGroup = $('#invite_token');
-  inviteTokenGroup.toggleClass('hidden');
-  inviteTokenGroup.children('input').focus();
-});
