@@ -1,6 +1,6 @@
 class PaymentSerializer < ActiveModel::Serializer
   attributes :id, :name, :last_paid_date, :next_pay_date, :url, :due_on, :created_at, :updated_at,
-             :payment_type, :autopay
+             :payment_type, :autopay, :allow_weekends
 
   has_one :account, embed: :ids
 
