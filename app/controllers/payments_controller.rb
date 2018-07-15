@@ -1,6 +1,6 @@
 class PaymentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_payment, only: [:pay, :destroy, :edit, :update, :show]
+  before_action :set_payment, only: %i(pay destroy edit update show)
 
   def index
     payments = current_user.account.payments.order(:next_pay_date)
@@ -27,12 +27,7 @@ class PaymentsController < ApplicationController
   def create
     @payment = current_user.account.payments.build(payment_params)
     @payment.update_next_pay_date
-
-    if @payment.save
-      redirect_to root_path
-    else
-      render :form
-    end
+    save_payment
   end
 
   def pay
@@ -60,12 +55,7 @@ class PaymentsController < ApplicationController
 
   def update
     @payment.assign_attributes(payment_params)
-
-    if @payment.save
-      redirect_to root_path
-    else
-      render :form
-    end
+    save_payment
   end
 
   private
@@ -76,5 +66,25 @@ class PaymentsController < ApplicationController
 
   def set_payment
     @payment = current_user.payments.find(params[:id])
+  end
+
+  def save_payment
+    saved = @payment.save
+    respond_to do |format|
+      format.html do
+        if saved
+          redirect_to root_path
+        else
+          render :form
+        end
+      end
+      format.json do
+        if saved
+          render json: @payment, serializer: PaymentSerializer
+        else
+          render json: { errors: @payment.errors.full_message }
+        end
+      end
+    end
   end
 end
