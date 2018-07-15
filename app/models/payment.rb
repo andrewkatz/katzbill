@@ -30,8 +30,8 @@ class Payment < ActiveRecord::Base
       set_next_pay_date
     end
 
-    adjust_next_pay_date
     update_next_pay_date if in_past?
+    adjust_next_pay_date
   end
 
   def days_left
