@@ -15,14 +15,6 @@ class Payment < ActiveRecord::Base
     save!
   end
 
-  def friendly_days_left
-    days = days_left
-    return 'Today' if days.zero?
-
-    days_str = [days, 'day'.pluralize(days)].join(' ')
-    in_past? ? [days_str, 'ago'].join(' ') : days_str
-  end
-
   def update_next_pay_date
     if next_pay_date
       self.next_pay_date += 1.month
@@ -30,8 +22,17 @@ class Payment < ActiveRecord::Base
       set_next_pay_date
     end
 
-    adjust_next_pay_date
+    diff = adjust_next_pay_date
+    self.next_pay_date += diff if diff > 7.days
     update_next_pay_date if in_past?
+  end
+
+  def friendly_days_left
+    days = days_left
+    return 'Today' if days.zero?
+
+    days_str = [days, 'day'.pluralize(days)].join(' ')
+    in_past? ? [days_str, 'ago'].join(' ') : days_str
   end
 
   def days_left
@@ -51,6 +52,16 @@ class Payment < ActiveRecord::Base
 
   private
 
+  def adjust_next_pay_date
+    original_next_pay_date = next_pay_date
+    last_day_of_month = self.next_pay_date.end_of_month.day
+    day = [due_on, last_day_of_month].min
+    self.next_pay_date = Time.zone.local(next_pay_date.year, next_pay_date.month, day)
+
+    self.next_pay_date -= 1.day while !allow_weekends && weekend?
+    original_next_pay_date - next_pay_date
+  end
+
   def match_due_on
     set_next_pay_date
     adjust_next_pay_date
@@ -60,14 +71,6 @@ class Payment < ActiveRecord::Base
     now = Time.zone.now
     self.next_pay_date = now
     self.next_pay_date += 1.month if now.day > due_on
-  end
-
-  def adjust_next_pay_date
-    last_day_of_month = self.next_pay_date.end_of_month.day
-    day = [due_on, last_day_of_month].min
-    self.next_pay_date = Time.zone.local(next_pay_date.year, next_pay_date.month, day)
-
-    self.next_pay_date -= 1.day while !allow_weekends && weekend?
   end
 
   def in_past?
