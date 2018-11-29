@@ -62,12 +62,17 @@
         .panel-footer.text-right
           = f.submit 'Update', :class => 'btn btn-primary'
     .panel.panel-default
+      .panel-heading Mobile App
+      .panel-body
+        %p Scan this QR code to sign into the mobile app.
+        = raw sign_in_qr_code.as_html
+    .panel.panel-default
       .panel-heading Authentication Token
       .panel-body
         %p Use this for authenticating using the Chrome extension.
         %pre= resource.authentication_token
     .panel.panel-default
-      .panel-heading Delete User
+      .panel-heading Delete Account
       .panel-body
         - if resource.account.owner == resource
           This will delete your account and

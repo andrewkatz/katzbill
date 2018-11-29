@@ -44,4 +44,10 @@ class RegistrationsController < Devise::RegistrationsController
       )
     )[:user]
   end
+
+  def sign_in_qr_code
+    content = [resource.email, resource.authentication_token].join('|')
+    RQRCode::QRCode.new(content, size: 8, level: :h)
+  end
+  helper_method :sign_in_qr_code
 end
