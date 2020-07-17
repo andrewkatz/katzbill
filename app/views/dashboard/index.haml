@@ -4,6 +4,15 @@
     = DateTime.now.in_time_zone('Pacific Time (US & Canada)').strftime("%B %d at %I:%M %p")
 .row
   .col-md-6.col-md-push-3
+    %p.promo
+      We are just getting things going here, but will soon start charging for the service. Want to get 1 year free when we do? Post on
+      %strong Instagram
+      with the hashtag
+      %strong #billsandstuff
+      about how much you like the product and send us the link at
+      = mail_to 'support@billsandstuff.com'
+.row
+  .col-md-6.col-md-push-3
     .panel.panel-default
       .panel-body
         - if @items.empty?
